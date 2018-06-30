@@ -2,6 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 
+//Routes
+const userRoutes = require('./routes/api/user');
+const profileRoutes = require('./routes/api/profile');
+const postsRoutes = require('./routes/api/posts');
+
 // DB Config
 const db = require('./config/keys').mongoURI;
 
@@ -13,6 +18,9 @@ mongoose
 
 const PORT = process.env.PORT || 5000
 
-app.get('/', (req, res) => res.status(200).send("Hello World!"))
+//Route distribution
+app.use('/api/user', userRoutes);
+app.use('/api/profile', profileRoutes);
+app.use('/api/posts', postsRoutes);
 
 app.listen(PORT, () => console.log(`We are connected to port ${PORT}`))
