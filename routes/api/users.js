@@ -49,7 +49,7 @@ router.post("/registration", (req, res) => {
           newUser
             .save()
             .then(savedUser => res.json(savedUser))
-            .catch(err => console.log(err.message));
+            .catch(err => console.log(err));
         });
       });
     }

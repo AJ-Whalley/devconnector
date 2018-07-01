@@ -21,10 +21,6 @@ module.exports = function validateRegistrationInput(data) {
     errors.name = "Name field is required";
   }
 
-  if (Validator.isEmpty(data.email)) {
-    errors.email = "Email field is required";
-  }
-
   const emailLocalPart = data.email.split("@");
   if (
     !Validator.isLength(emailLocalPart[0], {
@@ -37,8 +33,8 @@ module.exports = function validateRegistrationInput(data) {
     errors.email = "Email is invalid";
   }
 
-  if (Validator.isEmpty(data.password)) {
-    errors.password = "Password field is required";
+  if (Validator.isEmpty(data.email)) {
+    errors.email = "Email field is required";
   }
 
   if (
@@ -50,14 +46,17 @@ module.exports = function validateRegistrationInput(data) {
     errors.password = "Password must be between 6 & 30 characters";
   }
 
-  if (Validator.isEmpty(data.password2)) {
-    errors.password2 = "Confirm password field is required";
+  if (Validator.isEmpty(data.password)) {
+    errors.password = "Password field is required";
   }
 
   if (!Validator.equals(data.password, data.password2)) {
     errors.password2 = "Passwords must match";
   }
 
+  if (Validator.isEmpty(data.password2)) {
+    errors.password2 = "Confirm password field is required";
+  }
   return {
     errors,
     isValid: isEmpty(errors)
